@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker</title>
+    <!-- Link to the compiled CSS file -->
+    <link rel="stylesheet" href="src/style.css">
+    <!-- Link to the Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Monthly Budget Calculator</h1>
+    </header>
+    <main class="main-content">
+        <div class="container">
+            <div class="content">
+                <div class="income-expenses">
+                    <div class="income">
+                        <h2>Income <span class="tooltip-icon">?<span class="tooltip-text">Monthly income after
+                                    taxes</span></span></h2>
+                        <div>
+                            <input type="number" id="income-amount" placeholder="Income After Taxes" min="0">
+                        </div>
+                    </div>
+                    <div class="expenses">
+                        <h2>Expenses</h2>
+                        <div>
+                            <span class="color-circle" style="background-color: #4CAF50;"></span>
+                            <label>Giving <span class="tooltip-icon">i<span class="tooltip-text">Donations to charity or
+                                        to religious organizations</span></span></label>
+                            <input type="number" id="giving" placeholder="Amount" min="0">
+                        </div>
+                        <div>
+                            <span class="color-circle" style="background-color: #2196F3;"></span>
+                            <label>Savings <span class="tooltip-icon">i<span class="tooltip-text">Money set aside for
+                                        savings</span></span></label>
+                            <input type="number" id="savings" placeholder="Amount" min="0">
+                        </div>
+                        <div>
+                            <span class="color-circle" style="background-color: #FFC107;"></span>
+                            <label>Food <span class="tooltip-icon">i<span class="tooltip-text">Grocery bills and dining
+                                        out</span></span></label>
+                            <input type="number" id="food" placeholder="Amount" min="0">
+                        </div>
+                        <div>
+                            <span class="color-circle" style="background-color: #FF5722;"></span>
+                            <label>Utilities <span class="tooltip-icon">i<span class="tooltip-text">Electricity, water,
+                                        gas, etc.</span></span></label>
+                            <input type="number" id="utilities" placeholder="Amount" min="0">
+                        </div>
+                        <div>
+                            <span class="color-circle" style="background-color: #9C27B0;"></span>
+                            <label>Housing <span class="tooltip-icon">i<span class="tooltip-text">Total cost of your
+                                        mortgage or rent</span></span></label>
+                            <input type="number" id="housing" placeholder="Amount" min="0">
+                        </div>
+                        <div>
+                            <span class="color-circle" style="background-color: #3F51B5;"></span>
+                            <label>Transportation <span class="tooltip-icon">i<span class="tooltip-text">Public transit,
+                                        gas, maintenance</span></span></label>
+                            <input type="number" id="transportation" placeholder="Amount" min="0">
+                        </div>
+                        <div>
+                            <span class="color-circle" style="background-color: #00BCD4;"></span>
+                            <label>Insurance <span class="tooltip-icon">i<span class="tooltip-text">Health, auto, home
+                                        insurance</span></span></label>
+                            <input type="number" id="insurance" placeholder="Amount" min="0">
+                        </div>
+                        <div>
+                            <span class="color-circle" style="background-color: #009688;"></span>
+                            <label>Household Items <span class="tooltip-icon">i<span class="tooltip-text">Items such as
+                                        cleaning supplies, laundry detergent,
+                                        toiletries, etc</span></span></label>
+                            <input type="number" id="household-items" placeholder="Amount" min="0">
+                        </div>
+                        <div>
+                            <span class="color-circle" style="background-color: #795548;"></span>
+                            <label>Debt <span class="tooltip-icon">i<span class="tooltip-text">Credit card payments,
+                                        student loans, and car payments</span></span></label>
+                            <input type="number" id="debt" placeholder="Amount" min="0">
+                        </div>
+                        <div>
+                            <span class="color-circle" style="background-color: #E91E63;"></span>
+                            <label>Retirement <span class="tooltip-icon">i<span class="tooltip-text">Contributions to
+                                        retirement accounts 401K, IRA, etc</span></span></label>
+                            <input type="number" id="retirement" placeholder="Amount" min="0">
+                        </div>
+                        <div>
+                            <span class="color-circle" style="background-color: #607D8B;"></span>
+                            <label>Personal and Entertainment <span class="tooltip-icon">i<span
+                                        class="tooltip-text">Leisure
+                                        activities, hobbies, sporting events, and concerts</span></span></label>
+                            <input type="number" id="personal-entertainment" placeholder="Amount" min="0">
+                        </div>
+                        <div>
+                            <span class="color-circle" style="background-color: #8BC34A;"></span>
+                            <label>Other <span class="tooltip-icon">i<span class="tooltip-text">Miscellaneous
+                                        expenses</span></span></label>
+                            <input type="number" id="other" placeholder="Amount" min="0">
+                        </div>
+                        <div id="difference" class="difference"></div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="expense-chart"></canvas>
+                    <div id="chart-center-text" class="chart-center-text">
+                        <div>Total Expenses</div>
+                        <div id="chart-center-value"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="summary">
+                <h2>Summary</h2>
+                <p>Total Income: <span id="total-income">$0.00</span></p>
+                <p>Total Expenses: <span id="total-expenses">$0.00</span></p>
+                <p>Amount Left: <span id="total-budget">$0.00</span></p>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2024 Budget Tracker. All rights reserved.</p>
+    </footer>
+    <!-- Link to the JavaScript file -->
+    <script src="script.js"></script>
+</body>
+
+</html>

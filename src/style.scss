@@ -1,0 +1,275 @@
+/* Variables for primary colors */
+$primary-color: #3498db;
+$secondary-color: #2980b9;
+$background-color: #f4f4f4;
+$white-color: #fff;
+$box-shadow-color: rgba(0, 0, 0, 0.1);
+$font-color: #555;
+$tooltip-background-color: #555;
+$tooltip-text-color: #fff;
+$success-color: green;
+$error-color: red;
+
+/* Mixin for fade-in animation */
+@mixin fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Mixin for color change animation */
+@mixin colorChange {
+    from {
+        color: $error-color;
+    }
+
+    to {
+        color: $success-color;
+    }
+}
+
+/* Basic styles for the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: $background-color;
+    padding: 20px;
+}
+
+/* Container styles for centering content and adding some padding and shadow */
+.container {
+    max-width: 1400px;
+    /* Increased the width to accommodate all items */
+    margin: 0 auto;
+    background-color: $white-color;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px $box-shadow-color;
+    animation: fadeIn 1s;
+    /* Animation for fading in the container */
+}
+
+/* Heading styles */
+h1 {
+    color: $primary-color;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Button styles */
+button {
+    background-color: $primary-color;
+    color: $white-color;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+
+    &:hover {
+        background-color: $secondary-color;
+    }
+}
+
+/* Margin top for summary and chart container */
+.summary,
+.chart-container {
+    margin-top: 20px;
+}
+
+/* Styles for total budget text */
+#total-budget {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Margin bottom for each expense div */
+.expenses div {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    /* Align items vertically in the center */
+}
+
+/* Tooltip icon styles */
+.tooltip-icon {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: #ccc;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    margin-left: 5px;
+
+    &:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+/* Tooltip text visibility and transition effects */
+.tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: $tooltip-background-color;
+    color: $tooltip-text-color;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 105%;
+    /* Positioning the tooltip to the right of the icon */
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    /* Smooth transition for tooltip visibility */
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent transparent $tooltip-background-color;
+        /* Arrow styling */
+    }
+}
+
+/* Flexbox styles for the content area */
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    /* Ensure items do not wrap to the next line */
+}
+
+/* Flexbox properties for income-expenses section */
+.income-expenses {
+    flex: 1;
+    margin-right: 20px;
+}
+
+/* Margin bottom for income and expenses sections */
+.income,
+.expenses {
+    margin-bottom: 20px;
+}
+
+/* Adjusted styles for expense items */
+.expenses {
+    display: flex;
+    flex-direction: column;
+    /* Arrange all expenses in a single column */
+    gap: 10px;
+    /* Space between each expense item */
+
+    div {
+        display: flex;
+        /* Ensure each expense item takes the full width */
+        align-items: center;
+        /* Align items vertically in the center */
+    }
+
+    .color-circle {
+        margin-right: 10px;
+        /* Space between color circle and label */
+    }
+
+    label {
+        flex: 1;
+        /* Allow label to take up available space */
+    }
+
+    input {
+        margin-left: 15px;
+        /* Align inputs 15-20 pixels away from labels */
+        width: 150px;
+        /* Set a fixed width for inputs */
+    }
+}
+
+/* Chart container styles */
+.chart-container {
+    position: relative;
+    width: 60%;
+    max-width: 600px;
+    margin: 0 auto;
+
+    canvas {
+        width: 100%;
+        height: auto;
+    }
+
+    .chart-center-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+
+        #chart-center-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+    }
+}
+
+/* Animation for color change */
+.difference,
+.summary p {
+    margin-top: 10px;
+    font-weight: bold;
+    animation: colorChange 1s;
+    /* Animation for color change */
+}
+
+/* Circle indicators for expense categories */
+.color-circle {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    @include fadeIn;
+}
+
+@keyframes colorChange {
+    @include colorChange;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+    }
+
+    .income-expenses,
+    .chart-container {
+        width: 100%;
+    }
+}
