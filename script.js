@@ -21,7 +21,7 @@ class Budget {
         this.totalExpenses = 0; // Total expenses
         this.totalBudget = 0; // Total budget (income - expenses)
         this.chart = null; // Chart instance
-        this.initChart();  // Initialize the chart when the class is initailized
+        this.initChart();  // Initialize the chart when the class is initialized
     }
 
     // Method to set the income value
@@ -34,7 +34,8 @@ class Budget {
     calculateExpenses() {
         // Loop through each expense category and retrieve the value from the input field
         for (let key in this.expenses) {
-            this.expenses[key] = parseFloat(document.getElementById(key).value) || 0; // Parse input value or set to 0 if invalid
+            const value = parseFloat(document.getElementById(key).value); // Parse input value
+            this.expenses[key] = isNaN(value) ? 0 : value; // Parse input value or set to 0 if invalid
         }
         this.calculateBudget(); // Calculate the budget based on the new expenses
     }
@@ -58,6 +59,8 @@ class Budget {
         document.getElementById('total-expenses').innerText = this.formatCurrency(this.totalExpenses);
         // Update the displayed total expenses in the chart center
         document.getElementById('chart-center-value').innerText = this.formatCurrency(this.totalExpenses);
+        // Update the displayed amount left (total budget)
+        document.getElementById('total-budget').innerText = this.formatCurrency(this.totalBudget);
         this.updateChart(); // Update the chart with the new data
         this.updateDifference(); // Update the difference display
     }
@@ -92,7 +95,7 @@ class Budget {
                             label: (context) => {
                                 const label = context.label || ''; // Get the label of the current item
                                 const value = context.raw; // Get the raw value of the current item
-                                const total = context.chart._metasets[context.datasetIndex].total; // Get the total of all items
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0); // Get the total of all items
                                 const percentage = ((value / total) * 100).toFixed(2); // Calculate the percentage
                                 return `${label}: ${this.formatCurrency(value)} (${percentage}%)`; // Return the formatted label
                             }
@@ -114,7 +117,7 @@ class Budget {
         const differenceElement = document.getElementById('difference'); // Get the difference element
         const difference = this.totalIncome - this.totalExpenses; // Calculate the difference
         differenceElement.innerText = `Difference: ${this.formatCurrency(difference)}`; // Update the displayed difference
-        differenceElement.style.color = difference >= 0 ? 'green' : 'red'; // Set the color based on whether the difference is positive or negative
+        differenceElement.style.color = difference >= 0 ? 'green' : 'red'; // Set the color based on whether the difference is positive(green) or negative (red)
         // Update summary colors based on the difference
         document.getElementById('total-income').style.color = difference >= 0 ? 'green' : 'red';
         document.getElementById('total-expenses').style.color = difference >= 0 ? 'green' : 'red';
@@ -128,7 +131,7 @@ const budget = new Budget();
 // Event listener to handle setting the income
 document.getElementById('income-amount').addEventListener('input', () => {
     const amount = parseFloat(document.getElementById('income-amount').value); // Parse the input value
-    if (amount >= 0) { // Ensure the amount is non-negative
+    if (amount >= 0) { // Ensure the amount is positive
         budget.setIncome(amount); // Set the income in the budget
     }
 });
